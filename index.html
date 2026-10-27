@@ -14,6 +14,10 @@
 <meta property="og:title" content="GIC – Garuda International Company" />
 <meta property="og:description" content="Engineering infrastructure excellence across Sudan: water & sanitation, civil construction, renewable energy and engineering design." />
 <meta property="og:site_name" content="Garuda International Company" />
+<meta property="og:image" content="https://gic-garudainternational.com/images/og-preview.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
 
 <!-- Favicon (browser tab icon) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230D0D0D'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='26' font-weight='700' fill='%23C9A84C' text-anchor='middle'%3EGIC%3C/text%3E%3C/svg%3E" />
@@ -137,6 +141,29 @@
       radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,168,76,0.07) 0%, transparent 70%),
       linear-gradient(160deg, #0D0D0D 0%, #111008 50%, #0D0D0D 100%);
   }
+
+  .hero-photo {
+    position: absolute; inset: 0;
+    background: url('images/solar-pumping-array-aerial-kordofan.jpg') center 40% / cover no-repeat;
+    opacity: 0.5;
+  }
+  .hero-shade {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.55) 55%, rgba(13,13,13,0.35) 100%),
+      linear-gradient(0deg, rgba(13,13,13,1) 0%, rgba(13,13,13,0) 45%);
+  }
+  body.arabic .hero-shade {
+    background:
+      linear-gradient(270deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.55) 55%, rgba(13,13,13,0.35) 100%),
+      linear-gradient(0deg, rgba(13,13,13,1) 0%, rgba(13,13,13,0) 45%);
+  }
+  .hero-credit {
+    position: absolute; top: 6.2rem; right: 3rem;
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  body.arabic .hero-credit { right: auto; left: 3rem; }
 
   .hero-grid {
     position: absolute; inset: 0;
@@ -382,6 +409,71 @@
   .service-card:hover { background: var(--dark3); }
 
   .service-icon { font-size: 2.2rem; margin-bottom: 1.2rem; }
+  .service-photo {
+    display: block;
+    width: calc(100% + 5rem);
+    margin: -2.5rem -2.5rem 1.6rem;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    filter: saturate(0.92);
+    transition: filter 0.3s;
+    border-bottom: 1px solid var(--border);
+  }
+  .service-card:hover .service-photo { filter: saturate(1.05); }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--dark2); }
+  .gallery-intro { color: var(--text-muted); max-width: 640px; margin-top: -1.5rem; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 240px;
+    grid-auto-flow: dense;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  .gallery-item {
+    position: relative; overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--dark3);
+    cursor: zoom-in;
+    padding: 0;
+    color: inherit; font: inherit; text-align: inherit;
+  }
+  .gallery-item.wide { grid-column: span 2; grid-row: span 2; }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 0.5s ease;
+  }
+  .gallery-item:hover img, .gallery-item:focus-visible img { transform: scale(1.04); }
+  .gallery-item:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .gallery-cap {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 2.2rem 1rem 0.9rem;
+    background: linear-gradient(0deg, rgba(13,13,13,0.92), rgba(13,13,13,0));
+    font-size: 0.82rem; line-height: 1.45; color: var(--text);
+  }
+  .gallery-cap small {
+    display: block; margin-top: 0.15rem;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  }
+
+  .lightbox {
+    position: fixed; inset: 0; z-index: 200;
+    display: none; align-items: center; justify-content: center; flex-direction: column;
+    padding: 1.5rem;
+    background: rgba(5,5,5,0.94);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 82vh; object-fit: contain; border: 1px solid var(--border); }
+  .lightbox p { margin-top: 1rem; color: var(--text); text-align: center; max-width: 720px; font-size: 0.95rem; }
+  .lightbox-close {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 44px; height: 44px;
+    background: none; border: 1px solid var(--border); color: var(--gold);
+    font-size: 1.3rem; cursor: pointer;
+  }
   .service-title {
     font-family: var(--font-display);
     font-size: 1.4rem;
@@ -653,6 +745,14 @@
 
     #about { grid-template-columns: 1fr; gap: 2.5rem; }
     .projects-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 170px; gap: 0.6rem; }
+    .gallery-item.wide { grid-column: span 2; grid-row: span 2; }
+    .gallery-cap { font-size: 0.74rem; padding: 1.6rem 0.7rem 0.6rem; }
+    .gallery-cap small { display: none; }
+    .hero-credit { display: none; }
+    .hero-photo { opacity: 0.32; }
+    .service-photo { width: calc(100% + 4rem); margin: -2rem -2rem 1.4rem; }
+    .service-card { padding: 2rem; }
     .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
   }
@@ -686,6 +786,7 @@
     <li><a href="#about"><span class="en-inline">About</span><span class="ar-inline">عن الشركة</span></a></li>
     <li><a href="#services"><span class="en-inline">Services</span><span class="ar-inline">الخدمات</span></a></li>
     <li><a href="#projects"><span class="en-inline">Projects</span><span class="ar-inline">المشاريع</span></a></li>
+    <li><a href="#gallery"><span class="en-inline">Gallery</span><span class="ar-inline">معرض الصور</span></a></li>
     <li><a href="#team"><span class="en-inline">Team</span><span class="ar-inline">الفريق</span></a></li>
     <li><a href="#contact"><span class="en-inline">Contact</span><span class="ar-inline">تواصل معنا</span></a></li>
   </ul>
@@ -698,7 +799,13 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
+  <div class="hero-photo" role="img" aria-label="Aerial view of a GIC solar-powered water pumping system in Kordofan"></div>
+  <div class="hero-shade"></div>
   <div class="hero-grid"></div>
+  <p class="hero-credit">
+    <span class="en-inline">Solar water system — Kordofan</span>
+    <span class="ar-inline">نظام مياه بالطاقة الشمسية — كردفان</span>
+  </p>
 
   <p class="hero-tag">
     <span class="en-inline">Est. 2010 — Khartoum, Sudan</span>
@@ -820,7 +927,7 @@
 
   <div class="services-grid">
     <div class="service-card">
-      <div class="service-icon" aria-hidden="true">💧</div>
+      <img class="service-photo" src="images/sanitation-block-incinerator-handwashing.jpg" alt="Sanitation block with incinerator and handwashing station built by GIC" loading="lazy" width="1024" height="768" />
       <div class="service-title"><span class="en-inline">Water & Sanitation</span><span class="ar-inline">المياه والصرف الصحي</span></div>
       <p class="service-desc">
         <span class="en-inline">Comprehensive WASH solutions ensuring safe water access for communities across Sudan.</span>
@@ -834,7 +941,7 @@
     </div>
 
     <div class="service-card">
-      <div class="service-icon" aria-hidden="true">🏛️</div>
+      <img class="service-photo" src="images/steel-structure-warehouse-erection.jpg" alt="Erection of a steel-frame warehouse structure" loading="lazy" width="533" height="545" />
       <div class="service-title"><span class="en-inline">Civil Construction</span><span class="ar-inline">الإنشاءات المدنية</span></div>
       <p class="service-desc">
         <span class="en-inline">Full lifecycle project management for education, health, and civil infrastructure.</span>
@@ -848,7 +955,7 @@
     </div>
 
     <div class="service-card">
-      <div class="service-icon" aria-hidden="true">☀️</div>
+      <img class="service-photo" src="images/solar-water-yard-installation-kordofan.jpg" alt="Solar panel array at a fenced water yard in Kordofan" loading="lazy" width="1200" height="675" />
       <div class="service-title"><span class="en-inline">Renewable Energy</span><span class="ar-inline">الطاقة المتجددة</span></div>
       <p class="service-desc">
         <span class="en-inline">Solar and hybrid energy systems delivering reliable power to rural areas.</span>
@@ -862,7 +969,7 @@
     </div>
 
     <div class="service-card">
-      <div class="service-icon" aria-hidden="true">📐</div>
+      <img class="service-photo" src="images/topographic-survey-total-station.jpg" alt="Total station set up for a topographic site survey" loading="lazy" width="534" height="572" />
       <div class="service-title"><span class="en-inline">Engineering & Design</span><span class="ar-inline">الهندسة والتصميم</span></div>
       <p class="service-desc">
         <span class="en-inline">Technical expertise from architectural design to full supply chain services.</span>
@@ -947,6 +1054,91 @@
     </div>
   </div>
 </section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <p class="section-tag"><span class="en-inline">From the Field</span><span class="ar-inline">من الميدان</span></p>
+  <h2 class="section-title">
+    <span class="en">Project Gallery</span>
+    <span class="ar">معرض المشاريع</span>
+  </h2>
+  <p class="gallery-intro">
+    <span class="en-inline">Our teams on site — from borehole testing and solar water systems to sanitation and construction works.</span>
+    <span class="ar-inline">فرقنا في المواقع — من اختبارات الآبار وأنظمة المياه الشمسية إلى مرافق الصرف الصحي وأعمال الإنشاءات.</span>
+  </p>
+
+  <div class="gallery-grid">
+    <button type="button" class="gallery-item wide">
+      <img src="images/solar-water-yard-aerial-kordofan.jpg" alt="Aerial view of a solar-powered water yard with livestock troughs in Kordofan" loading="lazy" width="1200" height="675" />
+      <span class="gallery-cap">
+        <span class="en-inline">Solar-powered water yard with livestock troughs</span><span class="ar-inline">محطة مياه بالطاقة الشمسية مع أحواض لسقي الماشية</span>
+        <small><span class="en-inline">Renewable Energy · Kordofan</span><span class="ar-inline">طاقة متجددة · كردفان</span></small>
+      </span>
+    </button>
+    <button type="button" class="gallery-item">
+      <img src="images/borehole-pumping-test-field-team.jpg" alt="GIC field team recording data during a borehole pumping test" loading="lazy" width="1100" height="1100" />
+      <span class="gallery-cap">
+        <span class="en-inline">Field team recording a borehole pumping test</span><span class="ar-inline">فريق ميداني يسجّل بيانات اختبار ضخ لبئر</span>
+        <small><span class="en-inline">Hydrogeology · Khartoum State</span><span class="ar-inline">هيدروجيولوجيا · ولاية الخرطوم</span></small>
+      </span>
+    </button>
+    <button type="button" class="gallery-item">
+      <img src="images/pumping-test-wellhead-water-level-dipper.jpg" alt="Engineer fitting the wellhead with a water-level dipper during a pumping test" loading="lazy" width="1100" height="1100" />
+      <span class="gallery-cap">
+        <span class="en-inline">Wellhead set-up and water-level monitoring</span><span class="ar-inline">تجهيز رأس البئر وقياس منسوب المياه</span>
+        <small><span class="en-inline">Pumping Test</span><span class="ar-inline">اختبار الضخ</span></small>
+      </span>
+    </button>
+    <button type="button" class="gallery-item">
+      <img src="images/pump-installation-crane-truck-generator.jpg" alt="Crane truck with generator positioned for submersible pump installation next to elevated water tanks" loading="lazy" width="1100" height="1100" />
+      <span class="gallery-cap">
+        <span class="en-inline">Pump installation with crane truck and generator</span><span class="ar-inline">تركيب مضخة بواسطة رافعة ومولد كهربائي</span>
+        <small><span class="en-inline">Water Supply</span><span class="ar-inline">إمداد المياه</span></small>
+      </span>
+    </button>
+    <button type="button" class="gallery-item">
+      <img src="images/solar-water-yard-installation-kordofan.jpg" alt="Solar array and fencing at a water yard in Kordofan" loading="lazy" width="1200" height="675" />
+      <span class="gallery-cap">
+        <span class="en-inline">Water yard installation and fencing</span><span class="ar-inline">إنشاء محطة مياه وتسويرها</span>
+        <small><span class="en-inline">Renewable Energy · Kordofan</span><span class="ar-inline">طاقة متجددة · كردفان</span></small>
+      </span>
+    </button>
+    <button type="button" class="gallery-item">
+      <img src="images/sanitation-block-incinerator-handwashing.jpg" alt="Sanitation block with incinerator and handwashing station" loading="lazy" width="1024" height="768" />
+      <span class="gallery-cap">
+        <span class="en-inline">Sanitation block with incinerator and handwashing</span><span class="ar-inline">مرفق صرف صحي مع محرقة ومغسلة أيدٍ</span>
+        <small>WASH</small>
+      </span>
+    </button>
+    <button type="button" class="gallery-item">
+      <img src="images/solar-pumping-array-aerial-kordofan.jpg" alt="Aerial view of a solar pumping array beside an elevated water tank" loading="lazy" width="1700" height="956" />
+      <span class="gallery-cap">
+        <span class="en-inline">Solar pumping array beside the storage tank</span><span class="ar-inline">ألواح الضخ الشمسي بجوار خزان التخزين</span>
+        <small><span class="en-inline">Renewable Energy · Kordofan</span><span class="ar-inline">طاقة متجددة · كردفان</span></small>
+      </span>
+    </button>
+    <button type="button" class="gallery-item">
+      <img src="images/steel-structure-warehouse-erection.jpg" alt="Steel-frame warehouse structure under erection" loading="lazy" width="533" height="545" />
+      <span class="gallery-cap">
+        <span class="en-inline">Steel structure erection</span><span class="ar-inline">تركيب هيكل معدني</span>
+        <small><span class="en-inline">Civil Construction</span><span class="ar-inline">الإنشاءات المدنية</span></small>
+      </span>
+    </button>
+    <button type="button" class="gallery-item">
+      <img src="images/topographic-survey-total-station.jpg" alt="Total station during a site setting-out survey" loading="lazy" width="534" height="572" />
+      <span class="gallery-cap">
+        <span class="en-inline">Site survey and setting-out</span><span class="ar-inline">المسح الميداني وتوقيع المحاور</span>
+        <small><span class="en-inline">Engineering &amp; Design</span><span class="ar-inline">الهندسة والتصميم</span></small>
+      </span>
+    </button>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+  <img id="lightboxImg" src="" alt="" />
+  <p id="lightboxCap"></p>
+</div>
 
 <div class="divider"></div>
 
@@ -1124,6 +1316,32 @@
       menuBtn.setAttribute('aria-expanded', 'false');
     });
   });
+
+  /* Gallery lightbox */
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const lbCap = document.getElementById('lightboxCap');
+  let lastTrigger = null;
+  function closeLightbox() {
+    lb.classList.remove('open');
+    lbImg.src = '';
+    if (lastTrigger) lastTrigger.focus();
+  }
+  document.querySelectorAll('.gallery-item').forEach(function (item) {
+    item.addEventListener('click', function () {
+      const img = item.querySelector('img');
+      const isArabic = document.body.classList.contains('arabic');
+      const cap = item.querySelector('.gallery-cap ' + (isArabic ? '.ar-inline' : '.en-inline'));
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCap.textContent = cap ? cap.textContent : img.alt;
+      lastTrigger = item;
+      lb.classList.add('open');
+      document.getElementById('lightboxClose').focus();
+    });
+  });
+  lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLightbox(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('open')) closeLightbox(); });
 
   /* Contact form: opens the visitor's email app with the message filled in */
   document.getElementById('contactForm').addEventListener('submit', function (e) {
